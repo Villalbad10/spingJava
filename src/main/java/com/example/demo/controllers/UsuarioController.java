@@ -3,9 +3,7 @@ package com.example.demo.controllers;
 import com.example.demo.dao.UsuarioDao;
 import com.example.demo.models.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -15,7 +13,7 @@ public class UsuarioController {
     @Autowired
     private UsuarioDao usuarioDao;
 
-    @RequestMapping(value = "usuario/{id}")
+    @RequestMapping(value = "api/usuario")
     public Usuario getUsuario(@PathVariable Long id) {
         Usuario usuario = new Usuario();
         usuario.setId(id);
@@ -27,12 +25,12 @@ public class UsuarioController {
         return usuario;
     }
 
-    @RequestMapping(value = "usuarios")
+    @RequestMapping(value = "api/usuarios")
     public List<Usuario> getUsuarios() {
         return usuarioDao.getUsuarios();
     }
 
-    @RequestMapping(value = "usuario/1")
+    @RequestMapping(value = "api/usuario/1")
     public Usuario editar() {
         Usuario usuario = new Usuario();
         usuario.setNombre("Diego");
@@ -43,7 +41,7 @@ public class UsuarioController {
         return usuario;
     }
 
-    @RequestMapping(value = "usuario/2")
+    @RequestMapping(value = "api/usuario/2")
     public Usuario agregar() {
         Usuario usuario = new Usuario();
         usuario.setNombre("Diego");
@@ -54,18 +52,12 @@ public class UsuarioController {
         return usuario;
     }
 
-    @RequestMapping(value = "usuario/3")
-    public Usuario eliminar() {
-        Usuario usuario = new Usuario();
-        usuario.setNombre("Diego");
-        usuario.setApellido("villalba");
-        usuario.setEmail("diego@gmail.com");
-        usuario.setPass("113");
-
-        return usuario;
+    @RequestMapping(value = "api/usuario/{id}", method = RequestMethod.DELETE)
+    public void eliminar(@PathVariable Long id) {
+        usuarioDao.eliminar(id);
     }
 
-    @RequestMapping(value = "usuario/4")
+    @RequestMapping(value = "api/usuario/4")
     public Usuario buscar() {
         Usuario usuario = new Usuario();
         usuario.setNombre("Diego");

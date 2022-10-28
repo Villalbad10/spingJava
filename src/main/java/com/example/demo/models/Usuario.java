@@ -4,12 +4,14 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+@CrossOrigin(origins = "http://localhost:8080/")
 @Entity
 @Table(name = "usuarios")
 @ToString
